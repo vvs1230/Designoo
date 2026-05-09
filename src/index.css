@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+  overflow: hidden;
+  background-color: #E6EAF2; /* fallback */
+}
+
+/* Background Mesh Gradient */
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f4fd;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(243, 232, 255, 0.8) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(224, 242, 254, 0.8) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(224, 231, 255, 0.6) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(252, 231, 243, 0.6) 0%, transparent 40%);
+  z-index: -1;
+}
+
+.bg-sphere {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.pink-sphere {
+  top: 5%;
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 30% 30%, #fbcfe8, #f472b6);
+  box-shadow: 0 10px 20px rgba(244, 114, 182, 0.3), inset -10px -10px 20px rgba(0,0,0,0.1);
+}
+
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 1000px;
+  height: 85vh;
+  max-height: 700px;
+  border-radius: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0,0,0,0.02), inset 0 0 0 1px rgba(255,255,255,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Top Logo Area */
+.top-cutout {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 12px 30px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add little curves to make it look like a smooth cutout */
+.top-cutout::before,
+.top-cutout::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+.top-cutout::before {
+  left: -20px;
+  border-top-right-radius: 20px;
+  box-shadow: 10px -10px 0 0 white;
+}
+.top-cutout::after {
+  right: -20px;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 0 white;
+}
+
+.logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.03em;
+}
+
+.logo-text {
+  color: #111827;
+}
+
+.logo-infinity {
+  background: linear-gradient(135deg, #d946ef, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+/* Content Area */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+  z-index: 2;
+}
+
+.emoji-container {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.emoji {
+  display: inline-block;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #6B7280;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #2563EB; /* Bright royal blue */
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #6B7280;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+}
+
+/* Button */
+.notify-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.4rem 1.25rem 0.4rem 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.2);
+}
+
+.notify-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(17, 24, 39, 0.3);
+  background: #1f2937;
+}
+
+.notify-btn .icon-circle {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notify-btn .chevron {
+  opacity: 0.7;
+  margin-left: 0.5rem;
+  transition: transform 0.3s;
+}
+
+.notify-btn:hover .chevron {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* Social Footer */
+.social-footer {
+  position: absolute;
+  bottom: 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  z-index: 2;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #F3F4F6;
+  color: #9CA3AF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: #E5E7EB;
+  color: #111827;
+  transform: translateY(-2px);
+}
+
+/* Floating Shapes */
+.floating-shape {
+  position: absolute;
+  z-index: 1;
+}
+
+.green-u {
+  bottom: 25%;
+  left: 20%;
+}
+
+.golden-zigzag {
+  bottom: 30%;
+  right: 20%;
+}
+
+.golden-sphere-corner {
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fbbf24, #d97706);
+  box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4), inset -10px -10px 20px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .card {
+    height: 90vh;
+    padding: 1rem;
+  }
+  .green-u {
+    bottom: 20%;
+    left: 5%;
+  }
+  .golden-zigzag {
+    bottom: 20%;
+    right: 5%;
+  }
+  .golden-sphere-corner {
+    width: 80px;
+    height: 80px;
+    bottom: -20px;
+    right: -20px;
+  }
+  .bg-sphere {
+    display: none;
+  }
+}
