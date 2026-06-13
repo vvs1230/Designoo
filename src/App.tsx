@@ -1,135 +1,492 @@
-import { Mail, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, ArrowDown } from 'lucide-react';
 import './index.css';
 
 function App() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    { question: "What services do you offer?", answer: "We offer comprehensive creative services including market research, branding strategies, advertising production, and digital web design to elevate your brand." },
+    { question: "How long does a typical project take?", answer: "Project timelines vary depending on scope, but a standard branding or web design project typically takes between 4 to 8 weeks from concept to launch." },
+    { question: "Do you work with startups?", answer: "Absolutely! We love working with ambitious entrepreneurs and startups to help them establish a strong, lasting brand identity from day one." },
+    { question: "What is your pricing structure?", answer: "We tailor our pricing based on the specific needs and deliverables of your project. Contact us for a customized quote after an initial consultation." }
+  ];
+
+  const brandLogos = [
+    { name: "Kellogg's", style: { fontFamily: "'Cinzel', serif", fontWeight: 800, letterSpacing: '1px' } },
+    { name: "L'ORÉAL", style: { fontFamily: "'Didot', serif", fontWeight: 600, letterSpacing: '4px' } },
+    { name: "★ Heineken", style: { fontFamily: "'Futura', sans-serif", fontWeight: 700 } },
+    { name: "Jeep", style: { fontFamily: "'Impact', sans-serif", fontWeight: 900, letterSpacing: '2px' } },
+    { name: "Champion", style: { fontFamily: "'Brush Script MT', cursive", fontWeight: 700 } },
+    { name: "Spotify", style: { fontFamily: "'Inter', sans-serif", fontWeight: 700 } },
+    { name: "Allianz", style: { fontFamily: "'Helvetica Neue', sans-serif", fontWeight: 800, letterSpacing: '-1px' } },
+    { name: "Coca-Cola", style: { fontFamily: "'Playbill', sans-serif", fontSize: '2rem', letterSpacing: '1px' } },
+    { name: "Gillette", style: { fontFamily: "'Arial Black', sans-serif", fontWeight: 900, fontStyle: 'italic' } },
+    { name: "NETFLIX", style: { fontFamily: "'Bebas Neue', sans-serif", fontWeight: 800, letterSpacing: '1px' } },
+  ];
+
   return (
-    <>
-      <div className="page-bg" />
-      
-      {/* Background Floating Orbs */}
-      <motion.div 
-        className="bg-sphere pink-sphere"
-        animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      
-      <div className="container-center">
+    <div className="app-container">
+      {/* HEADER / NAVIGATION */}
+      <header className="site-header">
+        <nav className="header-nav">
+          <a href="#how-it-works">How it works</a>
+          <a href="#services">Services</a>
+          <a href="#client">Client</a>
+        </nav>
+
+        <div className="header-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L12 12L2 22V2Z" fill="#7A1BF2"/>
+            <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22V2Z" fill="#D4FF00"/>
+          </svg>
+          <span className="logo-text">Designoo</span>
+        </div>
+
+        <div className="header-actions">
+          <a href="#faq" className="faq-link">FAQ</a>
+          <a href="#get-started" className="btn-get-started">
+            Get Started
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      {/* HERO SECTION */}
+      <section className="hero-section">
+        {/* Top Right Floating Pill */}
+        <div className="hero-top-pill">
+          <span className="pill-primary">25 M+ Creative ST</span>
+          <span className="pill-secondary">Division</span>
+        </div>
+
+        <div className="hero-content">
+          <div className="hero-badge">
+            <span>We make, Scroll Stop</span>
+          </div>
+
+          <h1 className="hero-title">
+            <div className="title-row">Elevate Your</div>
+            <div className="title-row">
+              Brand 
+              <span className="brand-logo-inline">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="#7A1BF2" />
+                  <path d="M12 4L14 9.5H19.5L15 13L16.8 19L12 15.5L7.2 19L9 13L4.5 9.5H10L12 4Z" fill="white" />
+                </svg>
+              </span> 
+              with Our
+            </div>
+            <div className="title-row">
+              <span className="highlight-green-text">Creative</span> Magic
+            </div>
+          </h1>
+
+          <div className="hero-bottom-area">
+            <div className="hero-description-block">
+              <div className="avatar-wrapper">
+                {/* Fallback SVG Avatar */}
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="20" r="19" fill="#E2E8F0" stroke="#D4FF00" strokeWidth="2"/>
+                  <path d="M20 22C16 22 13 19 13 15C13 11 16 8 20 8C24 8 27 11 27 15C27 19 24 22 20 22ZM20 24C26.6 24 32 29.4 32 36H8C8 29.4 13.4 24 20 24Z" fill="#94A3B8"/>
+                </svg>
+              </div>
+              <p className="hero-description">
+                We guide brands for entrepreneurs and surrounding<br />
+                brand identities that leave a lasting impact.
+              </p>
+            </div>
+
+            <div className="hero-scroll">
+              <span className="scroll-text">Scroll down</span>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="scroll-icon-circle"
+              >
+                <ArrowDown size={14} color="white" />
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* HERO FLOATING IMAGES */}
         <motion.div 
-          className="card"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="hero-floating floating-left"
+          animate={{ y: [-10, 10, -10] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          {/* Top Logo Cutout Simulation */}
-          <div className="top-cutout">
-            <div className="logo">
-              <span className="logo-text">Design</span>
-              <span className="logo-infinity">∞</span>
+          <div className="bg-shape grid-pattern"></div>
+          <img src="/lime_sneakers.png" alt="Lime Sneakers" className="floating-img sneakers-img" />
+          <svg className="bg-star star-1" viewBox="0 0 24 24" fill="none"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#D4FF00" /></svg>
+        </motion.div>
+
+        <motion.div 
+          className="hero-floating floating-right"
+          animate={{ y: [10, -10, 10] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="bg-shape tan-block"></div>
+          <img src="/purple_bottles.png" alt="Lavender Cosmetic Bottles" className="floating-img cosmetics-img" />
+          <svg className="bg-star star-2" viewBox="0 0 24 24" fill="none"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#7A1BF2" /></svg>
+        </motion.div>
+      </section>
+
+      {/* OUR EXPERTISE SECTION */}
+      <section className="expertise-section">
+        <div className="expertise-container">
+          <div className="expertise-header">
+            <h2>Our Expertise</h2>
+            <p>Transforming your identity by combining<br />creative strategy and expertise.</p>
+          </div>
+
+          <div className="expertise-grid">
+            {/* CARD 1 */}
+            <div className="expertise-card card-dark">
+              <div className="card-top">
+                <h3 className="text-lime">Video<br />Ads</h3>
+                <button className="card-arrow-btn">
+                  <ArrowUpRight size={18} />
+                </button>
+              </div>
+              <p className="card-desc">We study consumer behavior and business trends to forecast and improve business returns.</p>
+              <div className="card-image-container">
+                <img src="/market_research.png" alt="Market Research" className="card-img" />
+              </div>
+            </div>
+
+            {/* CARD 2 */}
+            <div className="expertise-card card-purple">
+              <div className="card-top">
+                <h3 className="text-white">Static<br />Creatives</h3>
+              </div>
+              <p className="card-desc text-white-alpha">Creative ads production that captures interest, generates conversions, and scales brand reach.</p>
+              <div className="card-image-container">
+                <img src="/ads_production.png" alt="Ads Production" className="card-img" />
+                <button className="card-overlap-btn-bottom-left">
+                  <ArrowUpRight size={24} />
+                </button>
+              </div>
+            </div>
+
+            {/* CARD 3 */}
+            <div className="expertise-card card-dark">
+              <div className="card-top">
+                <h3 className="text-lime">Promo<br />Videos</h3>
+                <button className="card-arrow-btn">
+                  <ArrowUpRight size={18} />
+                </button>
+              </div>
+              <p className="card-desc">Build identities that resonate deeply with customers and promote loyalty.</p>
+              <div className="card-image-container">
+                <img src="/branding_strategies.png" alt="Branding Strategies" className="card-img" />
+              </div>
             </div>
           </div>
 
-          {/* Floating 3D-like elements */}
-          <motion.div 
-            className="floating-shape green-u"
-            animate={{ y: [-10, 10, -10], rotate: [0, 5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <path d="M 30 10 C 10 10, 10 30, 30 30" stroke="#71B28C" strokeWidth="12" strokeLinecap="round" fill="none" style={{ filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.2))' }} />
-            </svg>
-          </motion.div>
-
-          <motion.div 
-            className="floating-shape golden-zigzag"
-            animate={{ y: [10, -10, 10], rotate: [0, -5, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <svg width="40" height="60" viewBox="0 0 40 60" fill="none">
-              <path d="M 10 10 L 30 20 L 10 40 L 30 50" stroke="#D19842" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.2))' }} />
-            </svg>
-          </motion.div>
-
-          <motion.div 
-            className="golden-sphere-corner"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5, type: "spring" }}
-          />
-
-          {/* Content */}
-          <div className="content">
-            <motion.div 
-              className="emoji-container"
-              initial={{ scale: 0, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-            >
-              <span className="emoji">👍🏽</span>
-            </motion.div>
-            
-            <motion.h4 
-              className="subtitle"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              আমরা এখনও
-            </motion.h4>
-            
-            <motion.h1 
-              className="title"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              ওয়েবসাইট তৈরি করছি।
-            </motion.h1>
-            
-            <motion.p 
-              className="description"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              খুব শীঘ্রই আমরা আমাদের ওয়েবসাইট লঞ্চ করতে যাচ্ছি।<br />
-              আমাদের সাথেই থাকুন।
-            </motion.p>
-            
-            <motion.button 
-              className="notify-btn"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-            >
-              <div className="icon-circle">
-                <Mail size={16} color="#111827" />
+          {/* LOWER BANNER */}
+          <div className="expertise-banner">
+            <div className="banner-left">
+              <h3 className="huge-lime-text">
+                WE CREATE<br/>
+                IMPACTFUL<br/>
+                EXPERIENCES FOR OUR<br/>
+                CLIENTS' CUSTOMERS<br/>
+                EVERY TIME THEY<br/>
+                ENGAGE WITH A<br/>
+                BRAND
+              </h3>
+            </div>
+            <div className="banner-right">
+              <div className="badge-wrapper">
+                <svg className="rotating-svg" viewBox="0 0 100 100" width="120" height="120">
+                  <path id="textPath-expertise" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
+                  <text>
+                    <textPath href="#textPath-expertise" fill="white" fontSize="8" letterSpacing="2.5">
+                      LET'S GET STARTED • LET'S GET STARTED •
+                    </textPath>
+                  </text>
+                </svg>
+                <div className="badge-center-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="9" height="9" fill="#D4FF00"/>
+                    <rect x="13" y="2" width="9" height="9" fill="#D4FF00"/>
+                    <rect x="2" y="13" width="9" height="9" fill="#D4FF00"/>
+                    <rect x="13" y="13" width="9" height="9" fill="#D4FF00"/>
+                  </svg>
+                </div>
               </div>
-              <span className="btn-text">আপডেট পেতে যুক্ত হোন</span>
-              <ChevronRight size={18} className="chevron" />
-            </motion.button>
+
+              <div className="stat-counter">
+                <span className="stat-number">700<span className="stat-plus">+</span></span>
+                <span className="stat-label">Project Completed</span>
+              </div>
+
+              <p className="banner-subtext">
+                We take pride in our work and always strive to deliver solutions<br/>
+                that are not only visual but also functional, helping our clients<br/>
+                achieve their business goals and outstanding experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RECENT WORK SECTION */}
+      <section className="recent-work-section">
+        {/* Large Background Chain Link Shape */}
+        <div className="bg-large-shape">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 0H150C177.6 0 200 22.4 200 50V150C200 177.6 177.6 200 150 200H50C22.4 200 0 177.6 0 150V50C0 22.4 22.4 0 50 0ZM50 40C44.5 40 40 44.5 40 50V150C40 155.5 44.5 160 50 160H150C155.5 160 160 155.5 160 150V50C160 44.5 155.5 40 150 40H50Z" fill="#D4FF00" />
+            <circle cx="100" cy="100" r="40" stroke="#D4FF00" strokeWidth="40" />
+          </svg>
+        </div>
+
+        <div className="recent-work-header">
+          <span className="section-tag">RECENT WORK</span>
+          <h2>Through meticulous planning, seamless execution,<br/>and creative problem-solving, we achieved<br/>remarkable project success.</h2>
+        </div>
+
+        <div className="work-masonry">
+          {/* LEFT COLUMN */}
+          <div className="masonry-col col-left">
+            {/* WORK 1: THE ORDINARY */}
+            <div className="work-card">
+              <div className="work-img-wrapper">
+                <img src="/work_ordinary.png" alt="The Ordinary" className="portfolio-asset" />
+                <svg className="corner-star" viewBox="0 0 24 24" fill="none"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#D4FF00" /></svg>
+                <div className="portfolio-hover-overlay">
+                   <div className="view-case-btn">View Case</div>
+                </div>
+              </div>
+              <div className="work-info">
+                <h3>The Ordinary</h3>
+                <div className="portfolio-tags">
+                  <span className="tag-pill">Design Digital</span>
+                  <span className="tag-pill">Web Design</span>
+                  <span className="tag-pill">Campaigns</span>
+                </div>
+              </div>
+            </div>
+
+            {/* WORK 3: APPLE INC */}
+            <div className="work-card mt-card">
+              <div className="work-img-wrapper work-apple-mockup">
+                <div className="apple-mockup-inner portfolio-asset">
+                  <div className="iphone-body">
+                    <div className="iphone-camera-module">
+                      <div className="camera-lens lens-1"><div className="inner-glass"></div></div>
+                      <div className="camera-lens lens-2"><div className="inner-glass"></div></div>
+                      <div className="camera-flash"></div>
+                    </div>
+                    <div className="apple-logo-simulate"></div>
+                  </div>
+                </div>
+                <svg className="corner-star star-left" viewBox="0 0 24 24" fill="none"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#D4FF00" /></svg>
+                <div className="portfolio-hover-overlay">
+                   <div className="view-case-btn">View Case</div>
+                </div>
+              </div>
+              <div className="work-info">
+                <h3>Apple Inc</h3>
+                <div className="portfolio-tags">
+                  <span className="tag-pill">Ads Content</span>
+                  <span className="tag-pill">Brand Analysis</span>
+                  <span className="tag-pill">Animations</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Social Icons */}
-          <motion.div 
-            className="social-footer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-          >
-            <a href="#" className="social-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
-            </a>
-            <a href="#" className="social-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="#" className="social-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-          </motion.div>
-        </motion.div>
-      </div>
-    </>
+          {/* RIGHT COLUMN */}
+          <div className="masonry-col col-right">
+            {/* WORK 2: GOOGLE LLC */}
+            <div className="work-card">
+              <div className="work-img-wrapper work-google-mockup">
+                <div className="google-mockup-inner portfolio-asset">
+                  <div className="google-header-dots">
+                    <span className="dot red-dot"></span>
+                    <span className="dot yellow-dot"></span>
+                    <span className="dot green-dot"></span>
+                  </div>
+                  <div className="google-content">
+                    <h4 className="google-logo-text">Google</h4>
+                    <div className="google-search-bar">
+                      <div className="search-icon-placeholder"></div>
+                      <div className="search-text-simulate"></div>
+                    </div>
+                    <div className="google-abstract-dots">
+                      {[...Array(24)].map((_, i) => (
+                        <span key={i} className="abstract-dot"></span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="portfolio-hover-overlay">
+                   <div className="view-case-btn">View Case</div>
+                </div>
+              </div>
+              <div className="work-info">
+                <h3>Google LLC</h3>
+                <div className="portfolio-tags">
+                  <span className="tag-pill">Brand Strategy</span>
+                  <span className="tag-pill">UX Research</span>
+                  <span className="tag-pill">Web Design</span>
+                </div>
+              </div>
+            </div>
+
+            {/* WORK 4: THE COCA-COLA COMPANY */}
+            <div className="work-card mt-card">
+              <div className="work-img-wrapper work-cola-mockup">
+                <div className="cola-mockup-inner portfolio-asset">
+                  <div className="cola-hand-illustration">
+                    <div className="cola-can">
+                      <div className="cola-can-white-wave"></div>
+                      <span className="cola-brand-label">Cola</span>
+                    </div>
+                  </div>
+                  {/* Overlay Badge Top Right */}
+                  <div className="cola-overlap-badge-top-right">
+                    <span>VIEW WORK</span>
+                    <ArrowUpRight size={16} />
+                  </div>
+                </div>
+                <div className="portfolio-hover-overlay">
+                   <div className="view-case-btn">View Case</div>
+                </div>
+              </div>
+              <div className="work-info">
+                <h3>The Coca-cola Company</h3>
+                <div className="portfolio-tags">
+                  <span className="tag-pill">Advertising</span>
+                  <span className="tag-pill">UI/UX Design</span>
+                  <span className="tag-pill">Campaigns</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BRAND LOGO TICKER */}
+      <section className="logo-ticker-section">
+        <div className="ticker-container">
+          <div className="ticker-track">
+            {brandLogos.concat(brandLogos).map((logo, index) => (
+              <div key={index} className="ticker-item" style={logo.style}>
+                {logo.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section className="faq-section" id="faq">
+        <div className="faq-container">
+          <div className="faq-header">
+            <span className="section-tag">Q&amp;A</span>
+            <h2>Frequently Asked<br/>Questions</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className={`faq-item ${openFaq === index ? 'active' : ''}`}
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+              >
+                <div className="faq-question">
+                  <h3>{faq.question}</h3>
+                  <div className="faq-icon-circle">
+                    {openFaq === index ? (
+                      <svg width="14" height="2" viewBox="0 0 14 2" fill="none"><rect width="14" height="2" fill="currentColor"/></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect y="6" width="14" height="2" fill="currentColor"/><rect x="6" width="2" height="14" fill="currentColor"/></svg>
+                    )}
+                  </div>
+                </div>
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="faq-answer-wrapper"
+                    >
+                      <div className="faq-answer">
+                        <p>{faq.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER / CALL TO ACTION */}
+      <footer className="site-footer">
+        <div className="footer-cta-container">
+          <span className="cta-sub">Start crafting your brand story</span>
+          <h2 className="cta-title">
+            PARTNER WITH US TO CREATE <br />
+            A <span className="compelling-pill">COMPELLING</span> NARRATIVE <br />
+            FOR YOUR BRAND!
+          </h2>
+
+          <div className="cta-badge-wrapper">
+            <svg className="cta-rotating-svg" viewBox="0 0 100 100" width="130" height="130">
+              <path id="textPath-cta" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
+              <text>
+                <textPath href="#textPath-cta" fill="white" fontSize="8.5" letterSpacing="2.8">
+                  LET'S GET STARTED • LET'S GET STARTED •
+                </textPath>
+              </text>
+            </svg>
+            <div className="cta-badge-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 2L12 12L2 22V2Z" fill="#7A1BF2"/>
+                <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22V2Z" fill="#D4FF00"/>
+              </svg>
+            </div>
+          </div>
+
+          <p className="cta-desc">
+            Let's bring your vision to life, start building a modern <br/>
+            agency website for your business today.
+          </p>
+
+          <div className="footer-bottom-grid">
+            <div className="footer-branding">
+              <div className="footer-logo">
+                <span className="logo-text-lime">Designoo</span>
+              </div>
+              <p className="footer-address">
+                9519 Boston St, Chicago, IL 60611 USA<br />
+                +1 312 555 0188 | hello@designoo.com<br/>
+                info@designoo.com
+              </p>
+            </div>
+
+            <div className="footer-pills">
+              <a href="#video-ads" className="footer-pill-btn">Video Ads</a>
+              <a href="#static-creatives" className="footer-pill-btn">Static Creatives</a>
+              <a href="#promo-videos" className="footer-pill-btn">Promo Videos</a>
+            </div>
+
+            <div className="footer-copyright">
+              <a href="#privacy">Privacy & Cookie Policy</a>
+              <span>Designoo © 2026</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
 
