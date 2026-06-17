@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, ArrowDown } from 'lucide-react';
+import { ArrowUpRight, ArrowDown, ArrowRight } from 'lucide-react';
 import './index.css';
 
 function App() {
@@ -57,17 +57,9 @@ function App() {
 
       {/* HERO SECTION */}
       <section className="hero-section">
-        {/* Top Right Floating Pill */}
-        <div className="hero-top-pill">
-          <span className="pill-primary">25 M+ Creative ST</span>
-          <span className="pill-secondary">Division</span>
-        </div>
-
+        {/* NEW HERO DESIGN */}
         <div className="hero-content">
-          <div className="hero-badge">
-            <span>We make, Scroll Stop</span>
-          </div>
-
+          <div className="hero-tagline">FOR PERFORMANCE MEDIA BUYERS</div>
           <h1 className="hero-title">
             <div className="title-row">Elevate Your</div>
             <div className="title-row">
@@ -75,7 +67,7 @@ function App() {
               <span className="brand-logo-inline">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="12" cy="12" r="12" fill="#7A1BF2" />
-                  <path d="M12 4L14 9.5H19.5L15 13L16.8 19L12 15.5L7.2 19L9 13L4.5 9.5H10L12 4Z" fill="white" />
+                  <path d="M12 5.5L13.85 9.26L18 9.86L15 12.78L15.71 16.92L12 14.97L8.29 16.92L9 12.78L6 9.86L10.15 9.26L12 5.5Z" fill="white" />
                 </svg>
               </span> 
               with Our
@@ -85,58 +77,73 @@ function App() {
             </div>
           </h1>
 
-          <div className="hero-bottom-area">
-            <div className="hero-description-block">
-              <div className="avatar-wrapper">
-                {/* Fallback SVG Avatar */}
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="20" cy="20" r="19" fill="#E2E8F0" stroke="#D4FF00" strokeWidth="2"/>
-                  <path d="M20 22C16 22 13 19 13 15C13 11 16 8 20 8C24 8 27 11 27 15C27 19 24 22 20 22ZM20 24C26.6 24 32 29.4 32 36H8C8 29.4 13.4 24 20 24Z" fill="#94A3B8"/>
-                </svg>
-              </div>
-              <p className="hero-description">
-                We guide brands for entrepreneurs and surrounding<br />
-                brand identities that leave a lasting impact.
-              </p>
-            </div>
+          <div className="hero-subheadline">
+            Every ad <span className="text-red">a winner.</span>
+          </div>
 
-            <div className="hero-scroll">
-              <span className="scroll-text">Scroll down</span>
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="scroll-icon-circle"
-              >
-                <ArrowDown size={14} color="white" />
-              </motion.div>
-            </div>
+          <div className="hero-action-area">
+            <button className="btn-dark-action">
+              <span className="btn-icon-red">
+                <ArrowRight size={16} color="white" />
+              </span>
+              Generate my creatives
+            </button>
+            <button className="btn-light-action">
+              Watch it work <ArrowRight size={16} />
+            </button>
           </div>
         </div>
 
-        {/* HERO FLOATING IMAGES */}
-        <motion.div 
-          className="hero-floating floating-left"
-          animate={{ y: [-10, 10, -10] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="bg-shape grid-pattern"></div>
-          <img src="/lime_sneakers.png" alt="Lime Sneakers" className="floating-img sneakers-img" />
-          <svg className="bg-star star-1" viewBox="0 0 24 24" fill="none"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#D4FF00" /></svg>
-        </motion.div>
+        {/* FLOATING CARDS — desktop: absolute, mobile: marquee scroll */}
+        <div className="floating-creatives-container">
+          {/* Desktop cards stay absolute-positioned */}
+          <div className="creative-card card-cat-warm desktop-card">
+            <img src="/hero_cat_warm.png" alt="Warm Cat" />
+            <div className="card-tag">GEN-Z</div>
+          </div>
+          <div className="creative-card card-perfume desktop-card">
+            <img src="/hero_perfume_premium.png" alt="Premium Perfume" />
+            <div className="card-tag">PREMIUM</div>
+          </div>
+          <div className="creative-card card-soda desktop-card">
+            <img src="/hero_soda_bold.png" alt="Bold Soda" />
+            <div className="card-tag">BOLD</div>
+          </div>
+          <div className="creative-card card-coffee desktop-card">
+            <img src="/hero_coffee_punchy.png" alt="Punchy Coffee" />
+            <div className="card-tag">PUNCHY</div>
+          </div>
+          <div className="creative-card card-minimal desktop-card">
+            <img src="/hero_minimal.png" alt="Minimal Skincare" />
+            <div className="card-tag">MINIMAL</div>
+          </div>
+          <div className="creative-card card-beauty desktop-card">
+            <img src="/hero_beauty.png" alt="Beauty Compact" />
+            <div className="card-tag">BEAUTY</div>
+          </div>
+          <div className="creative-card card-drop desktop-card">
+            <img src="/work_ordinary.png" alt="Drop" style={{objectFit: 'cover'}} />
+            <div className="card-tag">DROP</div>
+          </div>
 
-        <motion.div 
-          className="hero-floating floating-right"
-          animate={{ y: [10, -10, 10] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="bg-shape tan-block"></div>
-          <img src="/purple_bottles.png" alt="Lavender Cosmetic Bottles" className="floating-img cosmetics-img" />
-          <svg className="bg-star star-2" viewBox="0 0 24 24" fill="none"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="#7A1BF2" /></svg>
-        </motion.div>
+          {/* Mobile marquee track — duplicated for seamless loop */}
+          <div className="mobile-marquee">
+            <div className="marquee-track">
+              {["hero_cat_warm.png","hero_perfume_premium.png","hero_soda_bold.png","hero_coffee_punchy.png","hero_minimal.png","hero_beauty.png","work_ordinary.png",
+                "hero_cat_warm.png","hero_perfume_premium.png","hero_soda_bold.png","hero_coffee_punchy.png","hero_minimal.png","hero_beauty.png","work_ordinary.png"
+              ].map((src, i) => (
+                <div key={i} className={`marquee-card mc-${i % 7}`}>
+                  <img src={`/${src}`} alt="creative" />
+                  <div className="card-tag">{["GEN-Z","PREMIUM","BOLD","PUNCHY","MINIMAL","BEAUTY","DROP"][i % 7]}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* OUR EXPERTISE SECTION */}
-      <section className="expertise-section">
+      <section className="expertise-section" id="services">
         <div className="expertise-container">
           <div className="expertise-header">
             <h2>Our Expertise</h2>
@@ -236,7 +243,7 @@ function App() {
       </section>
 
       {/* RECENT WORK SECTION */}
-      <section className="recent-work-section">
+      <section className="recent-work-section" id="client">
         {/* Large Background Chain Link Shape */}
         <div className="bg-large-shape">
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -385,6 +392,47 @@ function App() {
         </div>
       </section>
 
+      {/* HOW WE BUILD SECTION */}
+      <section className="how-we-build-section" id="how-it-works">
+        <div className="hwb-container">
+          <div className="hwb-header">
+            <div className="hwb-label">
+              <span className="hwb-label-line"></span>
+              <span className="hwb-label-text">HOW WE BUILD.</span>
+            </div>
+            <h2 className="hwb-title">
+              <span className="hwb-title-red">Winning ads</span> don't happen by accident
+            </h2>
+            <p className="hwb-subtitle">
+              Brief. Generate. Learn. Scale. Every phase built to turn your ad spend into compounding winners, without opening a design tool.
+            </p>
+          </div>
+
+          <div className="hwb-cards">
+            <div className="hwb-card hwb-card-dark hwb-card-1">
+              <span className="hwb-card-num">01</span>
+              <h3 className="hwb-card-title">The brief</h3>
+              <p className="hwb-card-desc">Write one brief: product, audience, tone. Or paste a product URL and Designoo reads it for you. No assumptions.</p>
+            </div>
+            <div className="hwb-card hwb-card-light hwb-card-2">
+              <span className="hwb-card-num">02</span>
+              <h3 className="hwb-card-title">The output</h3>
+              <p className="hwb-card-desc">Hundreds of on-brand variants for every audience, size, segment and angle your campaigns need.</p>
+            </div>
+            <div className="hwb-card hwb-card-light hwb-card-3">
+              <span className="hwb-card-num">03</span>
+              <h3 className="hwb-card-title">The learning</h3>
+              <p className="hwb-card-desc">As spend comes in, every creative earns a real CTR and gets ranked. No opinions. Just measurement.</p>
+            </div>
+            <div className="hwb-card hwb-card-light hwb-card-4">
+              <span className="hwb-card-num">04</span>
+              <h3 className="hwb-card-title">The scaling</h3>
+              <p className="hwb-card-desc">Winners get more variants. Losers retire quietly. Monday starts with winners already scaling.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ SECTION */}
       <section className="faq-section" id="faq">
         <div className="faq-container">
@@ -430,7 +478,7 @@ function App() {
       </section>
 
       {/* FOOTER / CALL TO ACTION */}
-      <footer className="site-footer">
+      <footer className="site-footer" id="get-started">
         <div className="footer-cta-container">
           <span className="cta-sub">Start crafting your brand story</span>
           <h2 className="cta-title">
