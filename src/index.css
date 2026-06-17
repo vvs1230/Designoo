@@ -1347,9 +1347,10 @@ body {
   .work-info h3 { font-size: 1.6rem; }
   
   /* How We Build section */
-  .how-we-build-section { padding: 4rem 1.5rem; }
-  .hwb-title { font-size: 2.2rem; }
-  .hwb-subtitle { margin-bottom: 3rem; }
+  .how-we-build-section { padding: 4rem 1rem; }
+  .hwb-container { padding: 3rem 1.5rem; border-radius: 24px; }
+  .hwb-title { font-size: 2rem; white-space: normal; max-width: 100%; }
+  .hwb-subtitle { margin-bottom: 2rem; white-space: normal; }
   .hwb-cards { flex-direction: column; gap: 1rem; }
   .hwb-card-1, .hwb-card-2, .hwb-card-3, .hwb-card-4 { margin-top: 0; }
 
